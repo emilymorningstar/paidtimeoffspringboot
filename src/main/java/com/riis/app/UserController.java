@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
-@RequestMapping("/Employees")//is this supposed to be page name or table name?
+@RequestMapping("Employees")//is this supposed to be page name or table name?
 public class UserController {
 	@GetMapping
 	public String getUser() {
