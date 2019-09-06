@@ -1,5 +1,7 @@
 package com.riis.app;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +18,7 @@ public class RequestController {
 	RequestService requestService;
 	
 	@GetMapping
-	public RequestEntity getRequests(@RequestBody NewRequestModel requestDetails) {
+	public List<RequestEntity> getRequests(@RequestBody NewRequestModel requestDetails) {
 		return requestService.getRequests(requestDetails.getEmployeeId());
 	}
 	@PostMapping

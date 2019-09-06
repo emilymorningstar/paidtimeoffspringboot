@@ -1,6 +1,7 @@
 package com.riis.app;
 
 import java.sql.ResultSet;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,11 @@ public NewRequestModel createRequest(NewRequestModel request) {
 	BeanUtils.copyProperties(storedRequestDetails, returnValue);
 	return returnValue;
 }
-public RequestEntity getRequests(int employeeId) {
-	RequestEntity rs=requestRepository.findAllByEmployeeId(employeeId);
-	
-	return rs;//TODO properly get and return multiple rows
+public List<RequestEntity> getRequests(int employeeId) {
+	System.out.println("start request");
+	List<RequestEntity> rs = requestRepository.findByEmployeeId(employeeId);//will return multiplerows
+	RequestEntity r=null;
+	return rs;//DONE get and return multiple rows
 	
 }
 
