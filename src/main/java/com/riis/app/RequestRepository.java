@@ -12,4 +12,5 @@ public interface RequestRepository extends CrudRepository<RequestEntity, Integer
 	//RequestEntity findByEmployeeId(int employeeId);
 	//returns all requests from an employee
 	List<RequestEntity> findByEmployeeId(int employeeId);
+	List<RequestEntity> findAll();
 }

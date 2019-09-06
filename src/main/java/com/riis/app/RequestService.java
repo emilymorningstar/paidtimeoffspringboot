@@ -23,11 +23,15 @@ public NewRequestModel createRequest(NewRequestModel request) {
 	return returnValue;
 }
 public List<RequestEntity> getRequests(int employeeId) {
-	System.out.println("start request");
 	List<RequestEntity> rs = requestRepository.findByEmployeeId(employeeId);//will return multiplerows
 	RequestEntity r=null;
 	return rs;//DONE get and return multiple rows
 	
+}
+public List<RequestEntity> getAllRequests() {
+	List<RequestEntity> rs = requestRepository.findAll();//will return multiplerows
+	RequestEntity r=null;
+	return rs;
 }
 
 }
