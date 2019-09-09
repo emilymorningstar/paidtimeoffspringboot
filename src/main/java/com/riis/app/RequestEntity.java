@@ -24,6 +24,9 @@ private int status=2;
 //^^needed to use the databases key generation instead of trying to overwrite it 
 private int Id;
 
+public int getId() {
+	return Id;
+}
 public int getEmployeeId() {
 	return employeeId;
 }

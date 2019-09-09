@@ -2,6 +2,7 @@ package com.riis.app;
 
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,15 @@ public List<RequestEntity> getRequests(int employeeId) {
 }
 public List<RequestEntity> getAllRequests() {
 	List<RequestEntity> rs = requestRepository.findAll();//will return multiplerows
-	RequestEntity r=null;
 	return rs;
 }
 
+public RequestEntity approveRequest(int Id) {
+	RequestEntity storedRequestDetails = requestRepository.findById(Id);
+	storedRequestDetails.setStatus(1);
+//DONE? update the request
+	return storedRequestDetails;
+
+	
+}
 }
