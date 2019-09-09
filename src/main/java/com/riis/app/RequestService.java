@@ -34,9 +34,9 @@ public List<RequestEntity> getAllRequests() {
 	return rs;
 }
 
-public RequestEntity approveRequest(int Id) {
+public RequestEntity changeStatusRequest(int Id, int status) {
 	RequestEntity storedRequestDetails = requestRepository.findById(Id);
-	storedRequestDetails.setStatus(1);
+	storedRequestDetails.setStatus(status);
 //DONE? update the request
 	return storedRequestDetails;
 

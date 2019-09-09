@@ -22,8 +22,18 @@ public class AdminController {
 	public List<RequestEntity> getAllRequests() {
 		return requestService.getAllRequests();
 	}
-	@PutMapping //should be put. //make sure to pass an int and not a json object, no names and no {}
-	public @ResponseBody RequestEntity approveRequest(@RequestBody int Id) {
-		return requestService.approveRequest(Id);
+	@PutMapping(value="/{action}") //should be put. //make sure to pass an int and not a json object, no names and no {}
+	//action should be approve or deny
+	public @ResponseBody RequestEntity changeStatusRequest(@RequestBody int Id, @PathVariable ("action") String action) {
+		System.out.println(action);
+		int status = 2;
+		if(action.equalsIgnoreCase("deny"))
+		{
+			status=3;
+		}
+		if(action.equalsIgnoreCase("approve")) {
+			status=1;
+		}
+		return requestService.changeStatusRequest(Id, status);
 		
 }}
