@@ -49,7 +49,7 @@ public class UserEntity {
 	}
 	@Column(nullable = false)
 	private String Lastname;
-	@Column(nullable = false)
+	@Column(nullable = false, unique=true)//need to recreate database table to take effect
 	private String email;
 	@Column(nullable = false)
 	private int RoleID=2;
