@@ -1,12 +1,18 @@
 package com.riis.app;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService{
 	@Autowired
 		UserRepository userRepository;
 	@PostMapping
@@ -19,6 +25,15 @@ public class UserService {
 		UserDetailsRequestModel returnValue=new UserDetailsRequestModel();
 		BeanUtils.copyProperties(storedRequestDetails, returnValue);
 		return returnValue;
+	}
+	public UserDetails loadUserByUsername(String arg0)throws UsernameNotFoundException {//maybe add a user not found like in the demo
+		UserEntity userEntity = userRepository.findByEmail(arg0);
+		if(userEntity==null) {
+			throw new UsernameNotFoundException("username "+arg0+" not found");
+		}
+		//import spring framework security core
+		return new User(userEntity.getEmail(), userEntity.getPassword(), new ArrayList<>());
+		
 	}
 
 }
