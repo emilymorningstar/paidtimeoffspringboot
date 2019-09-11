@@ -19,6 +19,8 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 
 	public AuthorizationFilter(AuthenticationManager authenticationManager) {
 		super(authenticationManager);
+		System.out.println("auth filter created in Authorization filter");
+		
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.riis.app.SpringApplicationContext;
 import com.riis.app.UserEntity;
+import com.riis.app.UserLoginRequestModel;
 import com.riis.app.UserService;
 
 import io.jsonwebtoken.Jwts;

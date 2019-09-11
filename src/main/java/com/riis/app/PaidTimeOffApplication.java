@@ -12,10 +12,10 @@ public class PaidTimeOffApplication extends SpringBootServletInitializer{
 	public static void main(String[] args) {
 		SpringApplication.run(PaidTimeOffApplication.class, args);
 	}
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(PaidTimeOffApplication.class);
-	}
+//	@Override
+//	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//		return application.sources(PaidTimeOffApplication.class);
+//	}
 	@Bean 
 	public SpringApplicationContext springApplicationContext()
 	{

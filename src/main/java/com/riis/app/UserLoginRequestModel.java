@@ -1,4 +1,4 @@
-package com.riis.app.security;
+package com.riis.app;
 
 public class UserLoginRequestModel {
 	private String email;
