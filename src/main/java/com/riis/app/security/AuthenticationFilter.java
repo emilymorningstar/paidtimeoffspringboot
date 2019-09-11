@@ -17,14 +17,16 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.riis.app.UserLoginRequestModel;
+import com.riis.app.SpringApplicationContext;
+import com.riis.app.UserEntity;
+import com.riis.app.UserService;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 	private final AuthenticationManager authenticationManager;
-	
+	public String contentType;
 	public AuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager=authenticationManager;
 	}
@@ -32,7 +34,12 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest req,
 			HttpServletResponse res) throws AuthenticationException {
+		//runs only on login
+		System.out.println("trying authentication in authentication fileter");
+			System.out.flush();
 		try{
+			
+			//contentType = req.getHeader("Accept");
 			UserLoginRequestModel creds= new ObjectMapper().readValue(req.getInputStream(), UserLoginRequestModel.class);
 			
 			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getPassword(), new ArrayList<>()));
@@ -45,14 +52,18 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 	protected void successfulAuthentication(HttpServletRequest req,
 			HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException, ServletException{
 		String userName=((User)auth.getPrincipal()).getUsername();
-		//String tokenSecret=new SecurityConstants().getTokenSecret();
+		//String tokenSecret=new SecurityConstraints().getTokenSecret();
 		
 		String token= Jwts.builder().setSubject(userName)
-				.setExpiration(new Date(System.currentTimeMillis()+SecurityConstants.EXPERATION_TIME))
-				.signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET).compact();
-		res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
+				.setExpiration(new Date((System.currentTimeMillis())+SecurityConstraints.EXPERATION_TIME))
+				.signWith(SignatureAlgorithm.HS512, SecurityConstraints.TOKEN_SECRET).compact();
+		UserService userservice = (UserService) SpringApplicationContext.getBean("userService");
+		UserEntity userEntity= userservice.getUser(userName);
+		res.addHeader(SecurityConstraints.HEADER_STRING, SecurityConstraints.TOKEN_PREFIX + token);
+		res.addHeader("UserId", ""+userEntity.getId());
+		res.addHeader("Role", ""+userEntity.getRoleID());
 	}
 	
-	//TODO write websecurity class
+	//DONE write websecurity class
 	}
 

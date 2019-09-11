@@ -1,4 +1,4 @@
-package com.riis.demo;
+package com.riis.app;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

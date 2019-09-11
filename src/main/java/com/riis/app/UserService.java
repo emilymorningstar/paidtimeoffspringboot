@@ -31,8 +31,16 @@ public class UserService implements UserDetailsService{
 		if(userEntity==null) {
 			throw new UsernameNotFoundException("username "+arg0+" not found");
 		}
-		//import spring framework security core
+		//imported from spring framework security core
 		return new User(userEntity.getEmail(), userEntity.getPassword(), new ArrayList<>());
+		
+	}
+	public UserEntity getUser(String email) {
+		UserEntity userEntity = userRepository.findByEmail(email);
+		if(userEntity==null) {
+			throw new UsernameNotFoundException("username "+email+" not found");
+		}
+		return userEntity;
 		
 	}
 
