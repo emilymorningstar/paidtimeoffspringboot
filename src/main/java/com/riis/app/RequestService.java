@@ -25,7 +25,6 @@ public NewRequestModel createRequest(NewRequestModel request) {
 }
 public List<RequestEntity> getRequests(int employeeId) {
 	List<RequestEntity> rs = requestRepository.findByEmployeeId(employeeId);//will return multiplerows
-	RequestEntity r=null;
 	return rs;//DONE get and return multiple rows
 	
 }

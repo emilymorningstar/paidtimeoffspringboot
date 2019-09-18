@@ -6,7 +6,7 @@ public class NewRequestModel {
 	private Date startDate;
 	private Date endDate;
 	private int status=2;
-	private int employeeId;
+	private int employeeId=0;
 	public Date getEndDate() {
 		return endDate;
 	}
