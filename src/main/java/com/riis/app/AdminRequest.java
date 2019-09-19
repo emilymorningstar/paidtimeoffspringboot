@@ -18,6 +18,9 @@ public class AdminRequest {
 	}
 	public void setStartDate(Object object) {
 		//will be a problem in the year 10000
+		if(object==null) {
+			this.startDate="";
+		}
 		this.startDate =object.toString().substring(0, 10);
 	}
 	public String getEndDate() {
@@ -25,6 +28,9 @@ public class AdminRequest {
 	}
 	public void setEndDate(Object object) {
 		//will be a problem in the year 10000
+		if(object==null) {
+			this.endDate="";
+		}
 		this.endDate =object.toString().substring(0, 10);;
 	}
 	public int getStatus() {
