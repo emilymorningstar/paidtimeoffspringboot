@@ -1,7 +1,12 @@
 package com.riis.app;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -29,9 +34,24 @@ public List<RequestEntity> getRequests(int employeeId) {
 	return rs;//DONE get and return multiple rows
 	
 }
-public  List<RequestEntity>  getAllRequests() {
-	List<RequestEntity> rs = requestRepository.findAll();//will return multiplerows
-	return rs;
+public  List<AdminRequest>  getAllRequests() {
+	List<Object> rs = requestRepository.findRequests();//will return multiplerows
+	List<AdminRequest> ar = new ArrayList<>();
+	for (Object object : rs) {
+		System.out.println(Arrays.deepToString((Object[]) object));
+		
+		AdminRequest a = new AdminRequest();
+		a.setFirstname((String) ((Object[]) object)[0]);
+		a.setLastname((String) ((Object[]) object)[1]);
+		a.setEmail((String) ((Object[]) object)[2]);
+		a.setStartDate(((Object[]) object)[3]);
+		a.setEndDate(((Object[]) object)[4]);
+		a.setId(((Object[]) object)[5]);
+		a.setStatus(((Object[]) object)[6]);
+		ar.add(a);
+	}
+	System.out.flush();
+	return ar;
 }
 
 public RequestEntity changeStatusRequest(int Id, int status) {

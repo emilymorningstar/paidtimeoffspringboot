@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-@CrossOrigin
+@CrossOrigin()
 @RestController
 @RequestMapping("admin")
 public class AdminController {
@@ -23,7 +23,7 @@ public class AdminController {
 	
 	@GetMapping
 
-	public List<RequestEntity> getAllRequests() {
+	public List<AdminRequest> getAllRequests() {
 		return requestService.getAllRequests();
 	}
 	@PostMapping//should be put. //make sure to pass an int and not a json object, no names and no {}
