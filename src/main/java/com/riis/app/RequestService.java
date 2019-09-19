@@ -14,6 +14,7 @@ public class RequestService {
 @Autowired
 RequestRepository requestRepository;
 
+
 public NewRequestModel createRequest(NewRequestModel request) {
 	RequestEntity requestEntity = new RequestEntity(); 
 	BeanUtils.copyProperties(request, requestEntity);
@@ -28,7 +29,7 @@ public List<RequestEntity> getRequests(int employeeId) {
 	return rs;//DONE get and return multiple rows
 	
 }
-public List<RequestEntity> getAllRequests() {
+public  List<RequestEntity>  getAllRequests() {
 	List<RequestEntity> rs = requestRepository.findAll();//will return multiplerows
 	return rs;
 }
@@ -36,6 +37,7 @@ public List<RequestEntity> getAllRequests() {
 public RequestEntity changeStatusRequest(int Id, int status) {
 	RequestEntity storedRequestDetails = requestRepository.findById(Id);
 	storedRequestDetails.setStatus(status);
+	requestRepository.save(storedRequestDetails);
 //DONE? update the request
 	return storedRequestDetails;
 

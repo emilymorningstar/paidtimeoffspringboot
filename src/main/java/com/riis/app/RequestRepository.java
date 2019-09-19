@@ -1,6 +1,7 @@
 package com.riis.app;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,8 @@ public interface RequestRepository extends CrudRepository<RequestEntity, Integer
 	//RequestEntity findByEmployeeId(int employeeId);
 	//returns all requests from an employee
 	List<RequestEntity> findByEmployeeId(int employeeId);
-	List<RequestEntity> findAll();
+	List<RequestEntity>  findAll();
 	RequestEntity findById(int Id);
+	
 	
 }
